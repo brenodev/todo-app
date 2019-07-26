@@ -2,21 +2,20 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/loader.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "nodemon",
+    "production": "pm2 start src/loader.js --name todo-app"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
+  "devDependencies": {
+    "nodemon": "1.19.1",
     "body-parse": "0.1.0",
     "express": "4.17.1",
     "mongoose": "5.6.6",
     "node-restful": "0.2.6",
     "pm2": "3.5.1"
-  },
-  "devDependencies": {
-    "nodemon": "1.19.1"
   }
 }

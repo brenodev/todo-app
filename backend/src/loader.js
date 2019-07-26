@@ -1,0 +1,1 @@
+require('./config/server') // configuração do server para inicialização
