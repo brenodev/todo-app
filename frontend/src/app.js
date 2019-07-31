@@ -1,11 +1,11 @@
 'use strict'
-var React = require('react')
+import React from 'react';
 var createReactClass = require ('create-react-class');
 
 var Title = createReactClass({
   render: function(){
-    return React.createElement('h1', null, 'Olá mundo')
+    return <h1>Hello</h1>
   }
 })
 
-module.exports = Title
+export default Title
