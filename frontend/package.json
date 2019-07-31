@@ -10,8 +10,13 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "create-react-class": "^15.6.3",
     "webpack": "^4.38.0",
     "webpack-cli": "^3.3.6",
     "webpack-dev-server": "^3.7.2"
+  },
+  "dependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }
