@@ -1,8 +1,16 @@
 'use strict'
 import React from 'react';
 
-const App = () => (
-  <h1> Live Reload Funcionando</h1>
+import './app.css'
+import Todo from './components/Todo/Todo';
+import About from './components/About/About'
+
+const App = props => (
+  <div className='container'>
+    <Todo />
+    <About />
+  </div>
+
 )
 
 export default App

@@ -1,8 +1,6 @@
 'use-strict'
-
 const path = require('path');
 
-// objetos que o webpack precisa para fazer a leitura e gerar o Bundle
 module.exports = {
   devtool: 'source-map',
   entry: path.join(__dirname, 'src', 'index'),
@@ -12,15 +10,14 @@ module.exports = {
     publicPath: '/dist/'
   },
   devServer: {
-    port: 8080,
+    port: process.env.PORT || 3000,
     contentBase: './public',
     hot: true
   },
+  plugins: [
+  ],
   resolve: {
     extensions: ['.js','.jsx'],
-    alias: {
-      modules: __dirname + '/node_modules'
-    }
   },
   // Para utilizar o babel para compilar o JS
   module: {
@@ -33,10 +30,22 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/,
+        test: /\.(css|sass)$/,
         use: [
           'style-loader',
           'css-loader',
+          'sass-loader',
+        ]
+      },
+      {
+        test: /bootstrap\/dist\/js\/umd\//,
+        use: 'imports-loader?jQuery=jquery'
+      },
+      {
+        test: /font-awesome\.config\.js/,
+        use: [
+          { loader: 'style-loader' },
+          { loader: 'font-awesome-loader' }
         ]
       },
       {
