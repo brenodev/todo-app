@@ -5,6 +5,10 @@ const path = require('path');
 // objetos que o webpack precisa para fazer a leitura e gerar o Bundle
 module.exports = {
   devtool: 'source-map',
+  devServer: {
+    contentBase: './dist',
+    hot: true
+  },
   entry: path.join(__dirname, 'src', 'index'),
   output: {
     path: path.join(__dirname, 'dist'),
@@ -42,4 +46,4 @@ module.exports = {
       }
     ]
   }
-};
+}

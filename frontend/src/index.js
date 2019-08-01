@@ -6,5 +6,5 @@ import Title from './app'
 
 ReactDOM.render(
   <Title/>,
-  document.querySelector('[data-js="app"]')
+  document.getElementById('app')
 )

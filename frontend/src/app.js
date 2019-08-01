@@ -1,11 +1,8 @@
 'use strict'
 import React from 'react';
-var createReactClass = require ('create-react-class');
 
-var Title = createReactClass({
-  render: function(){
-    return <h1>Hello</h1>
-  }
-})
+const App = () => (
+  <h1> Live Reload Funcionando</h1>
+)
 
-export default Title
+export default App
