@@ -1,15 +1,18 @@
-// Configurando as rotas 
-const express = require('express')
+// Configurando as rotas
+const express = require("express");
 
 // Receber um parâmetro no NODE
 module.exports = function(server) {
   // API Routes
-  const router = express.Router()
+  const router = express.Router();
+
   // Middleware
-  server.use('/api', router) // específico para URL que começam com "/api" 
+  // específico para URL que começam com "/api"
+  server.use("/api", router);
+
   // TODO Routes
-  const todoService = require('../api/todo/todoService')
+  const todoService = require("../api/todo/todoService");
+
   // register irá usar todos os metodos declarados no todo services
-  todoService.register(router, '/todos') 
-  
-}
+  todoService.register(router, "/todos");
+};

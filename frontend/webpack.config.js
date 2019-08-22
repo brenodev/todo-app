@@ -1,65 +1,42 @@
-'use-strict'
-const path = require('path');
+const webpack = require("webpack");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
-  devtool: 'source-map',
-  entry: path.join(__dirname, 'src', 'index'),
+  entry: "./src/index.jsx",
   output: {
-    path: path.join(__dirname, 'dist'),
-    filename: 'bundle.js',
-    publicPath: '/dist/'
+    path: __dirname + "/public",
+    filename: "./app.js"
   },
   devServer: {
-    port: process.env.PORT || 3000,
-    contentBase: './public',
-    hot: true
+    port: 8080,
+    contentBase: "./public"
   },
-  plugins: [
-  ],
   resolve: {
-    extensions: ['.js','.jsx'],
+    extensions: ["", ".js", ".jsx"],
+    alias: {
+      modules: __dirname + "/node_modules"
+    }
   },
-  // Para utilizar o babel para compilar o JS
+  plugins: [new ExtractTextPlugin("app.css")],
   module: {
-    rules: [
+    loaders: [
       {
-        test: /\.(js|jsx)$/,
+        test: /.js[x]?$/,
+        loader: "babel-loader",
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
+        query: {
+          presets: ["es2015", "react"],
+          plugins: ["transform-object-rest-spread"]
         }
       },
       {
-        test: /\.(css|sass)$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader',
-        ]
+        test: /\.css$/,
+        loader: ExtractTextPlugin.extract("style-loader", "css-loader")
       },
       {
-        test: /bootstrap\/dist\/js\/umd\//,
-        use: 'imports-loader?jQuery=jquery'
-      },
-      {
-        test: /font-awesome\.config\.js/,
-        use: [
-          { loader: 'style-loader' },
-          { loader: 'font-awesome-loader' }
-        ]
-      },
-      {
-        test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
-      },
-      {
-        test: /\.(woff|woff2|eot|ttf|otf)$/,
-        use: [
-          'file-loader'
-        ]
+        test: /\.woff|.woff2|.ttf|.eot|.svg*.*$/,
+        loader: "file"
       }
     ]
   }
-}
+};

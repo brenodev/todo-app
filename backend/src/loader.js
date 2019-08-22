@@ -1,4 +1,8 @@
-const server = require('./config/server') // configuração do server para inicialização
-require('./config/database') // referencia aquivo database
+// configuração do server para inicialização
+const server = require("./config/server");
 
-require('./config/routes')(server)
+// referencia aquivo database
+require("./config/database");
+
+// referencia das rotas passando o server como parametro
+require("./config/routes")(server);

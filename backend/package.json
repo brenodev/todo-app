@@ -11,11 +11,11 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "1.19.1",
     "body-parse": "0.1.0",
     "express": "4.17.1",
     "mongoose": "5.6.6",
     "node-restful": "0.2.6",
-    "pm2": "3.5.1"
+    "nodemon": "1.19.1",
+    "pm2": "^3.5.1"
   }
 }
