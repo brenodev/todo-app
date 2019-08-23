@@ -15,7 +15,7 @@ const TodoForm = props => (
         onChange={props.handleChange}
       />
     </Grid>
-    <Grid cols="12 3 2">
+    <Grid cols="2 3 2">
       <IconButton style="primary" icon="plus" onClick={props.handleAdd} />
     </Grid>
   </div>
