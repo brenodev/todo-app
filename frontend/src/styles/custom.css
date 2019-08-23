@@ -1,6 +1,10 @@
 body,
 html {
+  display: flex;
   height: 100%;
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
 
 .btn {
@@ -9,5 +13,19 @@ html {
 
 .markAsDone {
   text-decoration: line-through;
-  color          : #777;
+  color: #777;
+}
+
+.tableActions {
+  width: 105px;
+}
+
+.todoForm {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 20px;
+}
+
+.inptSearch {
+  width: 90%;
 }

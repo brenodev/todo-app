@@ -1,0 +1,17 @@
+{
+  "script": "src/loader.js",
+  "name": "todo-app",
+  "env": {},
+  "merge_logs": true,
+  "vizion": true,
+  "autorestart": true,
+  "watch": true,
+  "instance_var": "NODE_APP_INSTANCE",
+  "pmx": true,
+  "automation": true,
+  "treekill": true,
+  "username": "breno.lopes",
+  "windowsHide": true,
+  "kill_retry_time": 100,
+  "write": true
+}

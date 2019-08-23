@@ -18,48 +18,61 @@ class Todo extends Component {
 
     this.handleAdd = this.handleAdd.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleRemove = this.handleRemove.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
     this.handleMarkAsDone = this.handleMarkAsDone.bind(this);
     this.handleMarkAsPending = this.handleMarkAsPending.bind(this);
+    this.handleRemove = this.handleRemove.bind(this);
+    this.handleClear = this.handleClear.bind(this);
     this.refresh();
   }
-
-  refresh() {
-    axios.get(`${URL}?sort=-createdAt`).then(res =>
+  // consulta a lista atualizada
+  refresh(description = "") {
+    const search = description ? `&description__regex=/${description}/` : "";
+    axios.get(`${URL}?sort=-createdAt${search}`).then(res =>
       this.setState({
         ...this.state,
-        description: "",
+        description,
         list: res.data
       })
     );
   }
-
+  // consulta a lista de TODO's
+  handleSearch() {
+    this.refresh(this.state.description);
+  }
+  // Escuta o change no input para atualizar o state
   handleChange(e) {
     this.setState({
       ...this.state,
       description: e.target.value
     });
   }
-
+  // Adiciona novo TODO
   handleAdd() {
     const description = this.state.description;
     axios.post(URL, { description }).then(res => this.refresh());
   }
-
+  // Marca como Tarefa concluída
   handleMarkAsDone(todo) {
     axios
       .put(`${URL}/${todo._id}`, { ...todo, done: true })
-      .then(res => this.refresh());
+      .then(res => this.refresh(this.state.description));
   }
-
+  // Para tarefas pendentes
   handleMarkAsPending(todo) {
     axios
       .put(`${URL}/${todo._id}`, { ...todo, done: false })
-      .then(res => this.refresh());
+      .then(res => this.refresh(this.state.description));
   }
 
   handleRemove(todo) {
-    axios.delete(`${URL}/${todo._id}`).then(res => this.refresh());
+    axios
+      .delete(`${URL}/${todo._id}`)
+      .then(res => this.refresh(this.state.description));
+  }
+
+  handleClear() {
+    this.refresh();
   }
 
   render() {
@@ -70,12 +83,14 @@ class Todo extends Component {
           description={this.state.description}
           handleChange={this.handleChange}
           handleAdd={this.handleAdd}
+          handleSearch={this.handleSearch}
+          handleClear={this.handleClear}
         />
         <TodoList
-          handleRemove={this.handleRemove}
+          list={this.state.list}
           handleMarkAsDone={this.handleMarkAsDone}
           handleMarkAsPending={this.handleMarkAsPending}
-          list={this.state.list}
+          handleRemove={this.handleRemove}
         />
       </div>
     );
