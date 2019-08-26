@@ -64,13 +64,13 @@ class Todo extends Component {
       .put(`${URL}/${todo._id}`, { ...todo, done: false })
       .then(res => this.refresh(this.state.description));
   }
-
+  // Excluí um TODO
   handleRemove(todo) {
     axios
       .delete(`${URL}/${todo._id}`)
       .then(res => this.refresh(this.state.description));
   }
-
+  // Limpa o input e faz um refresh
   handleClear() {
     this.refresh();
   }

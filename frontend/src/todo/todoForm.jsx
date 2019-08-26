@@ -3,6 +3,8 @@ import React from "react";
 import Grid from "../template/grid";
 import IconButton from "../template/iconButton";
 
+import { connect } from "react-redux";
+
 const TodoForm = props => {
   const keyHandle = e => {
     if (e.key === "Enter") {
@@ -33,4 +35,12 @@ const TodoForm = props => {
     </div>
   );
 };
-export default TodoForm;
+
+const mapStateToProps = state => ({
+  description: state.todo.description
+});
+
+export default connect(
+  mapStateToProps,
+  null
+)(TodoForm);
