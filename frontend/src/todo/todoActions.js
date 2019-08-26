@@ -8,15 +8,20 @@ export const changeDescription = event => ({
 });
 
 // Action creator que irá buscar o serviço no BACKEND
-export const search = description => {
-  const search = description ? `&description__regex=/${description}/` : "";
-  const request = axios.get(`${URL}?sort=-createdAt${search}`);
-  return {
-    type: "TODO_SEARCH",
-    payload: request
+export const search = () => {
+  return (dispatch, getState) => {
+    const description = getState().todo.description;
+    const search = description ? `&description__regex=/${description}/` : "";
+    const request = axios.get(`${URL}?sort=-createdAt${search}`).then(res =>
+      dispatch({
+        type: "TODO_SEARCHED",
+        payload: res.data
+      })
+    );
   };
 };
 
+// Action responsável por adicionar TODO
 export const add = description => {
   return dispatch => {
     axios
@@ -26,6 +31,7 @@ export const add = description => {
   };
 };
 
+// Action responsável por marcar TODO como concluído
 export const markAsDone = todo => {
   return dispatch => {
     axios
@@ -40,6 +46,7 @@ export const markAsDone = todo => {
   };
 };
 
+// Action responsável por marcar TODO como pendente
 export const markAsPending = todo => {
   return dispatch => {
     axios
@@ -48,14 +55,19 @@ export const markAsPending = todo => {
   };
 };
 
+// Action responsável por remover TODO
 export const remove = todo => {
   return dispatch => {
     axios.delete(`${URL}/${todo._id}`).then(res => dispatch(search()));
   };
 };
 
+// Action responsável por limpar campo de input
 export const clear = () => {
-  return {
-    type: "TODO_CLEAR"
-  };
+  return [
+    {
+      type: "TODO_CLEAR"
+    },
+    search()
+  ];
 };
