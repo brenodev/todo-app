@@ -2,14 +2,15 @@ import axios from "axios";
 
 const URL = "http://localhost:3003/api/todos";
 
-export const changeDescription = evt => ({
+export const changeDescription = event => ({
   type: "DESCRIPTION_CHANGE",
-  payload: evt.target.value
+  payload: event.target.value
 });
 
 // Action creator que irá buscar o serviço no BACKEND
-export const search = () => {
-  const request = axios.get(`${URL}?sort=-createdAt`);
+export const search = description => {
+  const search = description ? `&description__regex=/${description}/` : "";
+  const request = axios.get(`${URL}?sort=-createdAt${search}`);
   return {
     type: "TODO_SEARCH",
     payload: request
