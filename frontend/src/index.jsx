@@ -8,10 +8,10 @@ import reducer from "./main/reducers";
 //CUSTOM COMPONENTS
 import App from "./main/app";
 
-const store = createStore(
-  reducer,
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
-);
+const devTools =
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__();
+
+const store = createStore(reducer, devTools);
 
 ReactDOM.render(
   <Provider store={store}>
